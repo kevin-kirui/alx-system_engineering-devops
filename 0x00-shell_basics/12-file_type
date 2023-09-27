@@ -1,2 +1,2 @@
 #!/bin/bash
-file/tmp/iamafile
+chmod +x change_to_previous_directory.sh
