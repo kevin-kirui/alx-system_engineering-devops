@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod +x copy_html_files.sh
+cp -u *.html ..
