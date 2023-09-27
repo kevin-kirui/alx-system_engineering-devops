@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod +x delete_files_with_tilde.sh
+rm -f *~
