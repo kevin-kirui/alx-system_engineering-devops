@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod +x list_files.sh
+ls -l /boot
