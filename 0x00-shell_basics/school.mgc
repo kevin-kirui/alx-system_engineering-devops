@@ -1,3 +1,2 @@
 #!/bin/bash
-# Magic file for detecting School data files
-0 string SCHOOL School data file
+echo '0       string      SCHOOL  School data file' > school.mgc
