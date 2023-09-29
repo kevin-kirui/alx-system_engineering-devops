@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ls -A1 > temp_list.txt, export LC_COLLATE=c, sort -d -o temp_list.txt temp_list.txt, awk '{ORS = NR % 2 ? ", " : "\n"; print $0}' temp_list.txt, rm temp_list.txt
+ls -A1 > temp_list.txt,export LC_COLLATE=c,sort -d -o temp_list.txt temp_list.txt,awk '{ORS = NR % 2 ? ", " : "\n"; print $0}' temp_list.txt,rm temp_list.txt
