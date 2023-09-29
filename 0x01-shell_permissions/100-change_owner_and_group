@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chown -R vincent:staff /path/to/working_directory
+chown -R vincent:staff /path/to/working_directory
