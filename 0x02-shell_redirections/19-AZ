@@ -1,0 +1,3 @@
+#!/bin/bash
+input= 'Replace all characters' echo "${input//A/Z}" | tr 'c' 'e' 
+
