@@ -1,0 +1,2 @@
+#!/bin/bash
+ your_log_file.tsv  sort -k2,2nr  head -n 11  cut -f1
