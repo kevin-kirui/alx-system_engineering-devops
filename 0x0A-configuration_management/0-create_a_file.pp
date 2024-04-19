@@ -4,3 +4,4 @@ file { '/tmp/school':
  	owner   => 'www-date',
 	group   => 'www-data',
 	content => 'I love puppet'
+
