@@ -2,4 +2,3 @@
 # generating ssh key pairs
 
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/school
-
