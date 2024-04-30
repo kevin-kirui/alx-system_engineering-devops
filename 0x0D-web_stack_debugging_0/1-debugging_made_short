@@ -1,0 +1,8 @@
+#!/bin/bash
+# Stop any potentially running nginx service
+service nginx stop
+# Kill any remaining nginx processes
+pkill -f nginx
+# Start nginx in detached mode
+nginx
+
