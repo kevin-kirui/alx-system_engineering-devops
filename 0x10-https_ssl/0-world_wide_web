@@ -1,0 +1,31 @@
+#!/bin/bash
+# This script takes a domain and an optional subdomain as arguments and displays their DNS A record information
+
+# Function to perform DNS lookup and display information
+function dns_info {
+	local domain=$1
+	local subdomain=$2
+	local record_info=$(dig $subdomain.$domain +short -t A)
+
+	if [[ -z "$record_info" ]]; then
+		echo "The subdomain $subdomain does not have an A record or does not exist."
+	else
+		echo "The subdomain $subdomain is an A record and points to $record_info"
+	fi
+}
+
+# Main script logic
+if [[ $# -eq 1 ]]; then
+	domain=$1
+	dns_info $domain "www"
+	dns_info $domain "lb-01"
+	dns_info $domain "web-01"
+	dns_info $domain "web-02"
+elif [[ $# -eq 2 ]]; then
+	domain=$1
+	subdomain=$2
+	dns_info $domain $subdomain
+else
+	echo "Usage: $0 domain [subdomain]"
+	exit 1
+fi
