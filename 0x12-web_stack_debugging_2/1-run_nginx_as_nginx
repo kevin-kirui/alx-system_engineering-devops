@@ -1,12 +1,11 @@
-#!/usr/bin/env bash
-# This script configures the Nginx server to run as the nginx user and listen on port 8080
+#!/bin/bash
 
-# Update the nginx configuration file to listen on port 8080
+# Stop nginx service
+service nginx stop
+
+# Update nginx.conf file to listen on port 8080
 sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' /etc/nginx/sites-available/default
 
-# Update the nginx configuration file to run as the nginx user
-sed -i 's/user www-data;/user nginx;/g' /etc/nginx/nginx.conf
-
-# Restart the nginx service to apply the changes
-service nginx restart
+# Start nginx service as nginx user
+sudo -u nginx service nginx start
 
