@@ -4,11 +4,17 @@
 service nginx stop
 
 # Update Nginx configuration to run as nginx user
-sed -i 's/user\s*nginx;/user nginx nginx;/g' /etc/nginx/nginx.conf
+sed -i 's/user\s*\w*/user nginx nginx;/g' /etc/nginx/nginx.conf
+
+# Check if default configuration file exists
+if [ ! -f /etc/nginx/sites-available/default ]; then
+  echo "Default configuration file not found. Exiting..."
+  exit 1
+fi
 
 # Update Nginx configuration to listen on all active IPs on port 8080
-sed -i 's/listen\s*80;/listen *:8080;/g' /etc/nginx/sites-available/default
+sed -i 's/listen\s\+[^#]*/listen *:8080;/g' /etc/nginx/sites-available/default
 
-# Start Nginx
-service nginx start
+# Start Nginx with the user specified in the configuration
+service nginx start --user nginx
 
