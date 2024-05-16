@@ -6,12 +6,22 @@
 
 echo -e "Updating and installing Nginx.\n"
 sudo apt-get update -y -qq && \
-	 sudo apt-get install nginx -y
+         sudo apt-get install nginx -y
+
+if [ $? -ne 0 ]; then
+    echo "Failed to install Nginx."
+    exit 1
+fi
 
 echo -e "\nSetting up some minor stuff.\n"
 
 # starting nginx service
 sudo service nginx start
+
+if [ $? -ne 0 ]; then
+    echo "Failed to start Nginx."
+    exit 1
+fi
 
 # allowing nginx on firewall
 sudo ufw allow 'Nginx HTTP'
@@ -29,4 +39,10 @@ echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
 # Restarting nginx
 sudo service nginx restart
 
+if [ $? -ne 0 ]; then
+    echo "Failed to restart Nginx."
+    exit 1
+fi
+
 echo -e "\nCompleted.\n"
+
