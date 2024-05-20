@@ -1,39 +1,26 @@
 #!/usr/bin/python3
-"""
-Script to gather data from a REST API about an employee's TODO list progress.
-"""
+"""Returns to-do list information for a given employee ID."""
 
-import sys
 import requests
-
-def fetch_todo_list(employee_id):
-    """
-    Fetches the TODO list for the given employee ID from the API.
-    """
-    url = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(employee_id)
-    response = requests.get(url)
-    return response.json()
-
-def display_progress(employee_id, todo_list):
-    """
-    Displays the progress of the employee's TODO list.
-    """
-    employee_name = todo_list[0]['username']
-    total_tasks = len(todo_list)
-    completed_tasks = sum(1 for task in todo_list if task['completed'])
-
-    print("Employee {} is done with tasks({}/{}):".format(employee_name, completed_tasks, total_tasks))
-
-    for task in todo_list:
-        if task['completed']:
-            print("\t", task['title'])
+import sys
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: {} <employee_id>".format(sys.argv[0]))
-        sys.exit(1)
+    """
+    Main function of the script.
+    Retrieves employee information and to-do list information using the
+    REST API, and prints the to-do list progress for the employee.
+    """
 
-    employee_id = int(sys.argv[1])
-    todo_list = fetch_todo_list(employee_id)
-    display_progress(employee_id, todo_list)
+    # Base URL for the API endpoints
+    url = "https://jsonplaceholder.typicode.com/"
+    # Endpoint to get employee info
+    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
+    # Endpoint to get todo list for the employee
+    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
 
+    # Filter completed tasks
+    completed = [t.get("title") for t in todos if t.get("completed") is True]
+    # Print employee TODO list progress
+    print("Employee {} is done with tasks({}/{}):".format(
+        user.get("name"), len(completed), len(todos)))
+    [print("\t {}".format(c)) for c in completed]
