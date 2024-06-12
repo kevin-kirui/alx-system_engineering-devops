@@ -1,1 +1,16 @@
-Lets see
+#!/bin/bash
+
+# Define the Gunicorn process name (adjust as needed)
+GUNICORN_PROCESS="web_flask.0-hello_route:app"
+
+# Get the process IDs of all Gunicorn workers
+WORKER_PIDS=$(pgrep -f "$GUNICORN_PROCESS")
+
+# Gracefully restart each worker
+for PID in $WORKER_PIDS; do
+    echo "Gracefully restarting worker with PID $PID..."
+    kill -HUP "$PID"
+done
+
+echo "Graceful reload complete!"
+
